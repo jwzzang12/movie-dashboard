@@ -3,7 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kino</title>
+    <title>KINO</title>
+    <style>
+      .movies-container {
+        display: flex;
+        overflow-x: auto;
+        gap: 20px;
+        padding-bottom: 10px;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <h1>KINO</h1>
+    </header>
+
+    <div class="section" id="now-playing">
+      <h2>Now Playing</h2>
+      <div class="movies-container" id="now-playing-container"></div>
+    </div>
+    <!-- Now Playing Movies end -->
+
+    <div class="section" id="popular">
+      <h2>Popular Movies</h2>
+      <div class="movies-container" id="popular-container"></div>
+    </div>
+    <!-- Popular Movies end -->
+
+    <div class="section" id="upcoming">
+      <h2>Upcoming Movies</h2>
+      <div class="movies-container" id="upcoming-container"></div>
+    </div>
+    <!-- Upcoming Movies end -->
+
+    <div class="section" id="top-rated">
+      <h2>Top Rated Movies</h2>
+      <div class="movies-container" id="top-rated-container"></div>
+    </div>
+    <!-- Top Rated Movies end -->
+    <script src="./js/script.js"></script>
+  </body>
 </html>
