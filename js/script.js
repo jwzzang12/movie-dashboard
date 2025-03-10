@@ -11,7 +11,7 @@ function fetchMovies(endpoint, containerId) {
         const card = document.createElement('div');
         card.classList.add('movie-card');
         card.innerHTML = `
-              <img src="${baseImgUrl + movie.poster_path}" alt="${movie.title}">
+              <div class="img-container"><img src="${baseImgUrl + movie.poster_path}" alt="${movie.title}"></div>
               <div class="card-content">
                 <h3>${movie.title}</h3>
                 <p>Rating: ${movie.vote_average}</p>
