@@ -10,58 +10,81 @@ const options = {
   },
 };
 
-function fetchMovies(endpoint, containerElement) {
-  // Clear any existing movies before loading new ones
-  containerElement.innerHTML = '';
-
+function fetchMovies(endpoint) {
+  container.innerHTML = '';
   fetch(endpoint, options)
     .then((response) => response.json())
     .then((data) => {
-      const movies = data.results;
-      console.log(movies);
-      movies.forEach((movie) => {
-        const card = document.createElement('div');
-        card.classList.add('movie-card');
-        card.innerHTML = `
-              <div class="img-container">
-                <img src="${baseImgUrl + movie.poster_path}" alt="${movie.title}">
-              </div>
-              <div class="card-content">
-                <h3>${movie.title}</h3>
-                <p>Rating: ${movie.vote_average}</p>
-              </div>
-            `;
-        containerElement.appendChild(card);
-      });
+      displayMovies(data.results);
     })
     .catch((error) => console.error('Error fetching movies:', error));
 }
 
-const nowPlayingEndpoint = `https://api.themoviedb.org/3/movie/now_playing?&language=ko&page=1&region=KR`;
-const trendingEndpoint = `https://api.themoviedb.org/3/trending/movie/day?language=ko`;
-const upcomingEndpoint = `https://api.themoviedb.org/3/movie/upcoming?&language=ko&page=1&region=KR`;
+async function fetchTrendingMovies(genreId) {
+  container.innerHTML = '';
+  const totalPages = 3;
+  const allMovies = [];
+
+  for (let page = 1; page <= totalPages; page++) {
+    try {
+      const response = await fetch(`https://api.themoviedb.org/3/trending/movie/week?language=ko&page=${page}`, options);
+      const data = await response.json();
+      allMovies.push(...data.results);
+    } catch (error) {
+      console.error(`Error fetching page ${page}:`, error);
+    }
+  }
+
+  const filteredMovies = allMovies.filter((movie) => movie.genre_ids.includes(genreId));
+  displayMovies(filteredMovies);
+}
+
+function displayMovies(movies) {
+  container.innerHTML = movies
+    .map(
+      (movie) => `
+        <div class="movie-card">
+          <div class="img-container">
+            <img src="${baseImgUrl + movie.poster_path}" alt="${movie.title}">
+          </div>
+          <div class="card-content">
+            <h3>${movie.title}</h3>
+            <p>Rating: ${movie.vote_average}</p>
+          </div>
+        </div>
+      `
+    )
+    .join('');
+}
+
+const endpoints = {
+  'now-playing': 'https://api.themoviedb.org/3/movie/now_playing?language=ko&page=1&region=KR',
+  trending: 'https://api.themoviedb.org/3/trending/movie/week?language=ko',
+  upcoming: 'https://api.themoviedb.org/3/movie/upcoming?language=ko&page=1&region=KR',
+};
+
+const genreMap = {
+  action: 28,
+  adventure: 12,
+  comedy: 35,
+  SF: 878,
+  family: 10751,
+  fantasy: 14,
+  thriller: 53,
+};
 
 document.querySelectorAll('.tag-nav li').forEach((navItem) => {
   navItem.addEventListener('click', () => {
     document.querySelectorAll('.tag-nav li').forEach((item) => item.classList.remove('active'));
     navItem.classList.add('active');
 
-    let endpoint;
-    switch (navItem.id) {
-      case 'now-playing':
-        endpoint = nowPlayingEndpoint;
-        break;
-      case 'trending':
-        endpoint = trendingEndpoint;
-        break;
-      case 'upcoming':
-        endpoint = upcomingEndpoint;
-        break;
-      default:
-        endpoint = nowPlayingEndpoint;
+    const id = navItem.id;
+    if (endpoints[id]) {
+      fetchMovies(endpoints[id]);
+    } else if (genreMap[id]) {
+      fetchTrendingMovies(genreMap[id]);
     }
-    fetchMovies(endpoint, container);
   });
 });
 
-fetchMovies(nowPlayingEndpoint, container);
+fetchMovies(endpoints['now-playing']);
