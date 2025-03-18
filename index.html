@@ -13,6 +13,19 @@
     </header>
     <main>
       <section id="content">
+        <div class="container" id="video-container">
+          <div class="video__img-container"><img src="./images/mickey17_bg2.jpg" alt="Mickey17 스틸컷" /></div>
+          <!-- <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/fYhSVx-ys-Q?si=lQmCu8k2tkybBG_W&amp;controls=0"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe> -->
+        </div>
         <nav class="tag-nav">
           <ul>
             <li id="now-playing"><button>상영중</button></li>
@@ -27,9 +40,13 @@
             <li id="thriller"><button>스릴러</button></li>
           </ul>
         </nav>
+
         <div class="container" id="main-container"></div>
       </section>
-      <aside class="details"></aside>
+      <aside id="details">
+        <!-- <button id="close-btn">X</button> -->
+        <div id="details-container"></div>
+      </aside>
     </main>
 
     <script src="./js/script.js"></script>
