@@ -1,82 +1,89 @@
 body {
   height: 100vh;
   position: relative;
+  background-color: $bg-color;
+  color: $font-color;
+  font-weight: 400;
 }
 
 main {
   padding: 3rem;
   display: flex;
+  gap: 50px;
 }
 
-header {
-  padding: 3rem;
-  position: fixed;
+.header {
+  margin: 0 3rem 3rem;
 }
 
-section {
-  background-color: #c8cfd4;
+.header__title {
+  font-size: 5rem;
+  font-weight: 900;
+}
+
+.main__content {
   max-width: 1000px;
 }
-#video-container {
-  .video__img-container {
+
+.video {
+  &__img-container {
     width: 100%;
     height: 300px;
     overflow: hidden;
   }
-  img {
+
+  &__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
   }
-}
-#content {
-  overflow-y: hidden;
+  margin-bottom: 5rem;
 }
 
-#main-container {
+.movies {
   display: flex;
   padding-bottom: 10px;
   overflow-x: auto;
   gap: 20px;
 }
 
-.img-container {
+.movies__img-container {
   width: 200px;
   height: 300px;
   overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
-.img-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.tag-nav {
+.tags {
   margin-bottom: 3rem;
-  ul {
+
+  &__list {
     display: flex;
     gap: 20px;
-    li {
-      padding: 1rem 2rem;
-      border: 1px solid #000;
-      border-radius: 100px;
-      &.active {
-        background-color: #000;
-        color: #fff;
-      }
+  }
+
+  &__item {
+    padding: 1rem 2rem;
+    border: 1px solid $font-color;
+    border-radius: 100px;
+
+    &.active {
+      background-color: $font-color;
+      color: $bg-color;
+      opacity: 0.5;
     }
   }
 }
 
-#content aside {
+.details {
   height: 100%;
   max-width: 600px;
-  background-color: #ba5b5b;
+  background-color: rgba(77, 77, 77, 0.273);
   overflow: auto;
 }
-
-// #details {
-//   display: none;
-// }

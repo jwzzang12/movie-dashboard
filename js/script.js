@@ -1,6 +1,6 @@
 const baseImgUrl = 'https://image.tmdb.org/t/p/w200';
-const mainContainer = document.getElementById('main-container');
-const detailsContainer = document.getElementById('details-container');
+const movieContainer = document.getElementById('movie-container');
+const detailContainer = document.getElementById('detail-container');
 const detailsAside = document.getElementById('details');
 // const closeBtn = document.getElementById('close-btn');
 
@@ -18,7 +18,7 @@ const options = {
 };
 
 function fetchMovies(endpoint) {
-  mainContainer.innerHTML = '';
+  movieContainer.innerHTML = '';
   fetch(endpoint, options)
     .then((res) => res.json())
     .then((res) => {
@@ -28,7 +28,7 @@ function fetchMovies(endpoint) {
 }
 
 async function fetchTrendingMovies(genreId) {
-  mainContainer.innerHTML = '';
+  movieContainer.innerHTML = '';
   const totalPages = 3;
   const allMovies = [];
 
@@ -47,16 +47,12 @@ async function fetchTrendingMovies(genreId) {
 }
 
 function displayMovies(movies) {
-  mainContainer.innerHTML = movies
+  movieContainer.innerHTML = movies
     .map(
       (movie) => `
         <div class="movie-card" data-id="${movie.id}">
           <div class="img-container">
             <img src="${baseImgUrl + movie.poster_path}" alt="${movie.title}">
-          </div>
-          <div class="card-content">
-            <h3>${movie.title}</h3>
-            <p>Rating: ${movie.vote_average}</p>
           </div>
         </div>
       `
@@ -83,12 +79,12 @@ function fetchMovieDetails(movieId) {
     fetch(providersUrl, options).then((res) => res.json()),
   ])
     .then(([details, credits, providers]) => {
-      detailsContainer.innerHTML = `
+      detailContainer.innerHTML = `
         <div class="detail__img-container">
           <img src="${details.poster_path ? baseImgUrl + details.poster_path : defaultImg}" alt="${details.title}">
         </div>
         <div>
-          <div><span>개봉연도</span><span>${details.release_date}</span></div><div><span>평점</span><span>${details.vote_average}</span></div>
+          <div><span>${details.release_date}</span><span>개봉</span></div><div><span>평점</span><span>${details.vote_average}</span></div>
         </div>
         <p>${details.overview}</p>
         ${
@@ -150,15 +146,15 @@ const genreMap = {
   action: 28,
   adventure: 12,
   comedy: 35,
-  SF: 878,
+  sf: 878,
   family: 10751,
   fantasy: 14,
   thriller: 53,
 };
 
-document.querySelectorAll('.tag-nav li').forEach((navItem) => {
+document.querySelectorAll('.tags__list li').forEach((navItem) => {
   navItem.addEventListener('click', () => {
-    document.querySelectorAll('.tag-nav li').forEach((item) => item.classList.remove('active'));
+    document.querySelectorAll('.tags__list li').forEach((item) => item.classList.remove('active'));
     navItem.classList.add('active');
 
     const id = navItem.id;
@@ -171,4 +167,5 @@ document.querySelectorAll('.tag-nav li').forEach((navItem) => {
 });
 
 fetchMovies(endpoints['now-playing']);
+document.getElementById('now-playing').classList.add('active');
 fetchMovieDetails(696506);

@@ -13,7 +13,7 @@ body {
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.5;
-  color: #1a1a1a;
+  color: #fff;
   word-spacing: 1px;
 }
 
@@ -30,78 +30,84 @@ body {
 body {
   height: 100vh;
   position: relative;
+  background-color: #1a1a1a;
+  color: #fff;
+  font-weight: 400;
 }
 
 main {
   padding: 3rem;
   display: flex;
+  gap: 50px;
 }
 
-header {
-  padding: 3rem;
-  position: fixed;
+.header {
+  margin: 0 3rem 3rem;
 }
 
-section {
-  background-color: #c8cfd4;
+.header__title {
+  font-size: 5rem;
+  font-weight: 900;
+}
+
+.main__content {
   max-width: 1000px;
 }
 
-#video-container .video__img-container {
+.video {
+  margin-bottom: 5rem;
+}
+.video__img-container {
   width: 100%;
   height: 300px;
   overflow: hidden;
 }
-#video-container img {
+.video__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
 }
 
-#content {
-  overflow-y: hidden;
-}
-
-#main-container {
+.movies {
   display: flex;
   padding-bottom: 10px;
   overflow-x: auto;
   gap: 20px;
 }
 
-.img-container {
+.movies__img-container {
   width: 200px;
   height: 300px;
   overflow: hidden;
 }
-
-.img-container img {
+.movies__img-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.tag-nav {
+.tags {
   margin-bottom: 3rem;
 }
-.tag-nav ul {
+.tags__list {
   display: flex;
   gap: 20px;
 }
-.tag-nav ul li {
+.tags__item {
   padding: 1rem 2rem;
-  border: 1px solid #000;
+  border: 1px solid #fff;
   border-radius: 100px;
 }
-.tag-nav ul li.active {
-  background-color: #000;
-  color: #fff;
+.tags__item.active {
+  background-color: #fff;
+  color: #1a1a1a;
+  opacity: 0.5;
 }
 
-#content aside {
+.details {
   height: 100%;
   max-width: 600px;
-  background-color: #ba5b5b;
+  background-color: rgba(77, 77, 77, 0.273);
   overflow: auto;
 }

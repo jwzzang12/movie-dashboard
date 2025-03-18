@@ -8,13 +8,15 @@
     <title>KINO</title>
   </head>
   <body>
-    <header>
-      <h1>KINO</h1>
-    </header>
     <main>
-      <section id="content">
-        <div class="container" id="video-container">
-          <div class="video__img-container"><img src="./images/mickey17_bg2.jpg" alt="Mickey17 스틸컷" /></div>
+      <section class="main__content">
+        <header class="header">
+          <h1 class="header__title">KINO</h1>
+        </header>
+        <section class="video" id="video-container">
+          <div class="video__img-container">
+            <img class="video__img" src="./images/mickey17_bg2.jpg" alt="Mickey17 스틸컷" />
+          </div>
           <!-- <iframe
             width="560"
             height="315"
@@ -25,27 +27,28 @@
             referrerpolicy="strict-origin-when-cross-origin"
             allowfullscreen
           ></iframe> -->
-        </div>
-        <nav class="tag-nav">
-          <ul>
-            <li id="now-playing"><button>상영중</button></li>
-            <li id="trending"><button>인기</button></li>
-            <li id="upcoming"><button>개봉예정</button></li>
-            <li id="action"><button>액션</button></li>
-            <li id="adventure"><button>모험</button></li>
-            <li id="comedy"><button>코미디</button></li>
-            <li id="SF"><button>SF</button></li>
-            <li id="family"><button>가족</button></li>
-            <li id="fantasy"><button>판타지</button></li>
-            <li id="thriller"><button>스릴러</button></li>
+        </section>
+
+        <nav class="tags">
+          <ul class="tags__list">
+            <li class="tags__item active" id="now-playing"><button>상영중</button></li>
+            <li class="tags__item" id="trending"><button>인기</button></li>
+            <li class="tags__item" id="upcoming"><button>개봉예정</button></li>
+            <li class="tags__item" id="action"><button>액션</button></li>
+            <li class="tags__item" id="adventure"><button>모험</button></li>
+            <li class="tags__item" id="comedy"><button>코미디</button></li>
+            <li class="tags__item" id="sci-fi"><button>SF</button></li>
+            <li class="tags__item" id="family"><button>가족</button></li>
+            <li class="tags__item" id="fantasy"><button>판타지</button></li>
+            <li class="tags__item" id="thriller"><button>스릴러</button></li>
           </ul>
         </nav>
 
-        <div class="container" id="main-container"></div>
+        <div class="movies" id="movie-container"></div>
       </section>
-      <aside id="details">
-        <!-- <button id="close-btn">X</button> -->
-        <div id="details-container"></div>
+
+      <aside class="details">
+        <div class="details__content" id="detail-container"></div>
       </aside>
     </main>
 
