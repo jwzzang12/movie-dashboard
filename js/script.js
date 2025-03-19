@@ -131,3 +131,20 @@ document.querySelectorAll('.tags__list li').forEach((navItem) => {
 fetchMovies(endpoints['now-playing']);
 document.getElementById('now-playing').classList.add('active');
 fetchMovieDetails(696506);
+
+document.addEventListener('DOMContentLoaded', () => {
+  const videoModal = document.getElementById('video-modal');
+  const mainPoster = document.querySelector('.video__img-container');
+  const closeModal = document.getElementById('close-modal');
+  const modalIframe = document.getElementById('modal__iframe');
+
+  mainPoster.addEventListener('click', () => {
+    videoModal.style.display = 'block';
+    modalIframe.src = 'https://www.youtube.com/embed/fYhSVx-ys-Q?controls=1';
+  });
+
+  closeModal.addEventListener('click', () => {
+    videoModal.style.display = 'none';
+    modalIframe.src = '';
+  });
+});

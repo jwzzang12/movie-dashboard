@@ -58,6 +58,7 @@ main {
 }
 
 .video {
+  position: relative;
   margin-bottom: 5rem;
 }
 .video__img-container {
@@ -65,6 +66,19 @@ main {
   height: 300px;
   border-radius: 25px;
   overflow: hidden;
+  cursor: pointer;
+}
+.video__img-container:hover .play-btn {
+  font-size: 12rem;
+  z-index: 50;
+}
+.video .play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 10rem;
+  transform: translate(-50%, -50%);
+  transition: font-size 0.2s ease;
 }
 .video__img {
   width: 100%;
@@ -186,4 +200,32 @@ main {
 
 .character {
   color: #555;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 75%;
+  height: 75%;
+  transform: translate(-50%, -50%);
+}
+
+.close-btn {
+  position: absolute;
+  top: 50px;
+  right: 100px;
+}
+.close-btn .material-symbols-rounded {
+  font-size: 5rem;
 }

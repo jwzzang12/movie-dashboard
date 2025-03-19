@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/main.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
     <title>KINO</title>
   </head>
   <body>
@@ -15,18 +16,9 @@
         </header>
         <section class="video" id="video-container">
           <div class="video__img-container">
+            <span class="material-symbols-rounded play-btn"> play_arrow </span>
             <img class="video__img" src="./images/mickey17_bg2.jpg" alt="Mickey17 스틸컷" />
           </div>
-          <!-- <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/fYhSVx-ys-Q?si=lQmCu8k2tkybBG_W&amp;controls=0"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          ></iframe> -->
         </section>
 
         <nav class="tags">
@@ -50,6 +42,24 @@
         <div class="details__content" id="detail-container"></div>
       </aside>
     </main>
+
+    <div id="video-modal" class="modal">
+      <div class="modal__overlay"></div>
+      <div class="modal__content">
+        <iframe
+          id="modal__iframe"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/fYhSVx-ys-Q?controls=1"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        >
+        </iframe>
+        <button class="close-btn" id="close-modal"><span class="material-symbols-rounded"> close </span></button>
+      </div>
+    </div>
 
     <script src="./js/script.js"></script>
   </body>
