@@ -1,12 +1,7 @@
-const baseImgUrl = 'https://image.tmdb.org/t/p/w200';
+const baseImgUrl = 'https://image.tmdb.org/t/p/';
 const movieContainer = document.getElementById('movie-container');
 const detailContainer = document.getElementById('detail-container');
 const detailsAside = document.getElementById('details');
-// const closeBtn = document.getElementById('close-btn');
-
-// closeBtn.addEventListener('click', () => {
-//   detailsAside.style.display = 'none';
-// });
 
 const options = {
   method: 'GET',
@@ -50,18 +45,15 @@ function displayMovies(movies) {
   movieContainer.innerHTML = movies
     .map(
       (movie) => `
-        <div class="movie-card" data-id="${movie.id}">
-          <div class="img-container">
-            <img src="${baseImgUrl + movie.poster_path}" alt="${movie.title}">
-          </div>
+        <div class="movies__item" data-id="${movie.id}">
+          <img src="${baseImgUrl + 'w200' + movie.poster_path}" alt="${movie.title}">
         </div>
       `
     )
     .join('');
 
-  document.querySelectorAll('.movie-card').forEach((card) => {
+  document.querySelectorAll('.movies__item').forEach((card) => {
     card.addEventListener('click', () => {
-      // detailsAside.style.display = 'block';
       const movieId = card.getAttribute('data-id');
       fetchMovieDetails(movieId);
     });
@@ -71,57 +63,28 @@ function displayMovies(movies) {
 function fetchMovieDetails(movieId) {
   const detailsUrl = `https://api.themoviedb.org/3/movie/${movieId}?language=ko`;
   const creditsUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?language=ko`;
-  const providersUrl = `https://api.themoviedb.org/3/movie/${movieId}/watch/providers`;
 
-  Promise.all([
-    fetch(detailsUrl, options).then((res) => res.json()),
-    fetch(creditsUrl, options).then((res) => res.json()),
-    fetch(providersUrl, options).then((res) => res.json()),
-  ])
+  Promise.all([fetch(detailsUrl, options).then((res) => res.json()), fetch(creditsUrl, options).then((res) => res.json())])
     .then(([details, credits, providers]) => {
+      const rating = details.vote_average.toFixed(1);
+
       detailContainer.innerHTML = `
-        <div class="detail__img-container">
-          <img src="${details.poster_path ? baseImgUrl + details.poster_path : defaultImg}" alt="${details.title}">
+        <div class="details__img-container">
+          <img src="${details.poster_path ? baseImgUrl + 'original' + details.poster_path : defaultImg}" alt="${details.title}">
         </div>
-        <div>
-          <div><span>${details.release_date}</span><span>개봉</span></div><div><span>평점</span><span>${details.vote_average}</span></div>
+        <div class="details__info">
+          <div><span>${details.release_date}</span><span>개봉</span></div><div><span>평점</span><span>${rating}</span></div>
         </div>
-        <p>${details.overview}</p>
-        ${
-          providers.results?.KR?.buy
-            ? `<h3>구매</h3>
-          <div class="providers__info">
-            ${providers.results.KR.buy
-              .map(
-                (provider) => `
-                  <span>${provider.provider_name}</span>`
-              )
-              .join('')}
-          </div>`
-            : ''
-        }
-        ${
-          providers.results?.KR?.flatrate
-            ? `<h3>시청할 수 있는 서비스</h3>
-          <div class="providers__info">
-            ${providers.results.KR.flatrate
-              .map(
-                (provider) => `
-                    <span>${provider.provider_name}</span>`
-              )
-              .join('')}
-          </div>`
-            : ''
-        }
+        <p class="details__overview">${details.overview}</p>
         <h3>출연진</h3>
-        <ul>
+        <ul class="credits">
           ${credits.cast
             .slice(0, 5)
             .map(
               (actor) => `
             <li>
               <div class="credits__img-container">
-                <img src="${baseImgUrl + actor.profile_path}" alt="${actor.name}의 프로필사진">
+                <img src="${baseImgUrl + 'w200' + actor.profile_path}" alt="${actor.name}의 프로필사진">
               </div>
               <div class="credits__actor-info">
                 <div>${actor.name}</div>
@@ -146,8 +109,7 @@ const genreMap = {
   action: 28,
   adventure: 12,
   comedy: 35,
-  sf: 878,
-  family: 10751,
+  SF: 878,
   fantasy: 14,
   thriller: 53,
 };
