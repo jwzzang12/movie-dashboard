@@ -1,7 +1,8 @@
 body {
   font-weight: 400;
-  color: $font-color;
-  background-color: $bg-color;
+  color: $white-color;
+  background-color: $black-color;
+  font-family: $base-font;
 }
 
 main {
@@ -16,6 +17,7 @@ main {
 .header__title {
   font-size: 5rem;
   font-weight: 900;
+  font-family: 'Libre Baskerville', Sans-serif;
 }
 
 .main__content {
@@ -40,8 +42,8 @@ main {
     cursor: pointer;
 
     &:hover .play-btn {
-      font-size: 12rem;
       z-index: 50;
+      font-size: 12rem;
     }
   }
 
@@ -93,14 +95,14 @@ main {
 
   &__item {
     padding: 1rem 2rem;
-    border: 1px solid $font-color;
+    border: 1px solid $gray-color;
     border-radius: 100px;
     transition: background-color 0.3s ease;
 
     &.active {
-      color: $bg-color;
-      background-color: $font-color;
-      opacity: 0.5;
+      color: $black-color;
+      background-color: $white-color;
+      opacity: 0.7;
     }
   }
 }
@@ -135,9 +137,10 @@ main {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 2rem;
+    gap: 2rem;
     div {
       padding: 1rem;
-      border: 1px solid #565656;
+      border: 1px solid $gray-color;
       border-radius: 5px;
     }
   }
@@ -188,6 +191,7 @@ main {
 }
 
 .modal {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -214,4 +218,8 @@ iframe {
   .material-symbols-rounded {
     font-size: 5rem;
   }
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

@@ -73,10 +73,12 @@ function fetchMovieDetails(movieId) {
           <img src="${details.poster_path ? baseImgUrl + 'original' + details.poster_path : defaultImg}" alt="${details.title}">
         </div>
         <div class="details__info">
-          <div><span>${details.release_date}</span><span>개봉</span></div><div><span>평점</span><span>${rating}</span></div>
+          <div><span>${details.release_date}</span><span> 개봉</span></div><div><span>평점 </span><span>${rating}</span></div>
         </div>
         <p class="details__overview">${details.overview}</p>
-        <h3>출연진</h3>
+        ${
+          credits.cast.length !== 0
+            ? `<h3>출연진</h3>
         <ul class="credits">
           ${credits.cast
             .slice(0, 5)
@@ -93,7 +95,10 @@ function fetchMovieDetails(movieId) {
             </li>`
             )
             .join('')}
-        </ul>
+        </ul>`
+            : ''
+        }
+      
       `;
     })
     .catch((err) => console.error('Error fetching movie details:', err));
